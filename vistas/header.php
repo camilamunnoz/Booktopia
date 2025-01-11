@@ -60,6 +60,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="?c=categoria">Categorias</a>
                   <a class="dropdown-item" href="?c=genero">Generos</a>
+                  <a class="dropdown-item" href="?c=libro">Libros</a>
                 </div>
               </li>
               <li class="nav-item">
