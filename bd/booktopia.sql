@@ -191,3 +191,11 @@ ALTER TABLE libros_pedido
 ADD CONSTRAINT fk_libros_pedido_libros_1
 FOREIGN KEY (id_libro)
 REFERENCES  libro (id_libro);
+
+
+
+ALTER TABLE libro
+ADD COLUMN img varchar(2000) null;
+
+ALTER TABLE libro
+MODIFY img varchar(2000) null;
