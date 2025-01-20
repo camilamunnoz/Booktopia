@@ -93,7 +93,7 @@
                                     <input type="file" required class="form-control" id="img"
                                         name="img" placeholder="Imagen">
 
-                                    
+                                        <input type="hidden"  id="imgform" name="imgform" value="<?= $libro->getImg()?>"/>
 
                                 </div>
 
