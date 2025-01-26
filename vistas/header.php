@@ -25,6 +25,17 @@
   </head>
 
   <body>
+
+    <?php
+      session_start();
+
+      if(!isset($_SESSION['id_usuario']))
+      {
+        header("location:?c=inicio&a=Inicio");
+        session_destroy();
+      }
+    ?>
+
     <!-- Aqui se hara la pantalla de carga-->
     <!-- ***** Preloader Start ***** -->
     <div id="preloader">
@@ -41,7 +52,7 @@
     <header class="">
       <nav class="navbar navbar-expand-lg">
         <div class="container">
-          <a class="navbar-brand" href="?c=inicio"><h2>Book<em>topia</em></h2></a>
+          <a class="navbar-brand" href="?c=inicio&a=Principal"><h2>Book<em>topia</em></h2></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -49,7 +60,7 @@
             <ul class="navbar-nav ml-auto">
               <!--Items del menu o sea, cada boton :)-->
               <li class="nav-item active">
-                <a class="nav-link" href="?c=inicio">Inicio
+                <a class="nav-link" href="?c=inicio&a=Principal">Inicio
                   <span class="sr-only">(current)</span>
                 </a>
               </li> 
@@ -62,7 +73,7 @@
                   <a class="dropdown-item" href="?c=genero">Generos</a>
                   <a class="dropdown-item" href="?c=libro">Libros</a>
                 </div>
-              </li>
+              </li>          
               <li class="nav-item">
                 <a class="nav-link" href="products.html">Catalogos Digitales</a>
               </li>
@@ -75,9 +86,17 @@
               <li class="nav-item">
                 <a class="nav-link" href="shopping-cart.html"><i class="fa fa-shopping-cart"></i></a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="login.html"><i class="fa fa-user"></i></a>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-user"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="?c=usuario&a=Logout">Cerrar Sesion</a>
+                  <a class="dropdown-item" href="?c=usuario&a=VerPerfil">Ver perfil</a>
+                </div>
+                <!-- <a class="nav-link" href="login.html"><i class="fa fa-user"></i></a> -->
               </li>
+              
             </ul>
           </div>
         </div>
