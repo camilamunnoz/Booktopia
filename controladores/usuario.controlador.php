@@ -42,7 +42,7 @@ class UsuarioControlador{
         }
         else
         {
-            header("location:?c=inicio&a=Login");
+            header("location:?c=inicio");
         }
     }
 

@@ -121,6 +121,20 @@ class Libro
         }
     }
 
+    public function ListarPagina($pagina, $cantidad){
+        try {
+            
+            $consulta = $this->pdo->prepare("SELECT * FROM libro LIMIT ?,?;");
+            $consulta->bindParam(1, $pagina, PDO::PARAM_INT);
+            $consulta->bindParam(2, $cantidad, PDO::PARAM_INT);
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_OBJ);
+
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function Insertar(Libro $libro)
     {
         try {
@@ -217,6 +231,36 @@ class Libro
             $consulta = $this->pdo->prepare("SELECT * FROM libro WHERE id_libro=?;");
             $consulta->execute(array($id));
             $resultado = $consulta->fetch(PDO::FETCH_OBJ);
+
+            $libro = new Libro();
+
+            $libro->setIdLibro($resultado->id_libro);
+            $libro->setTitulo($resultado->titulo);
+            $libro->setNombreAutor($resultado->nombre_autor);
+            $libro->setIdGenero($resultado->id_genero);
+            $libro->setIdCategoria($resultado->id_categoria);
+            $libro->setFormato($resultado->formato);
+            $libro->setPrecio($resultado->precio);
+            $libro->setSinopsis($resultado->sinopsis);
+            $libro->setImg($resultado->img);
+
+            return $libro;
+
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function ObtenerPorIdNull($id){
+        try {
+            
+            $consulta = $this->pdo->prepare("SELECT * FROM libro WHERE id_libro=?;");
+            $consulta->execute(array($id));
+            $resultado = $consulta->fetch(PDO::FETCH_OBJ);
+
+            if($consulta->rowCount() == 0){
+                return null;
+            }
 
             $libro = new Libro();
 

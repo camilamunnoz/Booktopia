@@ -147,13 +147,13 @@ class Carrito
             if($consulta->rowCount() == 0)
             {
 
-                $carrito->setIdUsuario(id_usuario);
+                $carrito->setIdUsuario($id_usuario);
                 $carrito->setFechaCreacion(date("Y-m-d H:i:s"));
                 $carrito->setTotal(0);
 
                 $id_carrito = $this->Insertar($carrito);
 
-                $carrito->setIdCarrito(id_carrito);
+                $carrito->setIdCarrito($id_carrito);
             }
             else
             {

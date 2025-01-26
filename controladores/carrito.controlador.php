@@ -9,6 +9,7 @@ class CarritoControlador{
     private $modelo;
     private $librosCarrito;
     private $libro;
+    private $totalCarrito = 0.0;
 
     public function __construct(){
 
@@ -24,27 +25,13 @@ class CarritoControlador{
         require_once "vistas/footer.php";
     }
 
-    public function Form()
-    {
-        $carrito = new Carrito();
-        $tituloFormulario = "Crear";
-
-        if(isset($_GET['id']))
-        {
-           $carrito = $this->modelo->ObtenerPorId($_GET['id']);
-           $tituloFormulario = "Editar";
-        }
-
-        require_once "vistas/header.php";
-        require_once "vistas/carrito/form.php";
-        require_once "vistas/footer.php";
-    }
-
     public function AgregarAlCarrito(){
 
+        session_start();
+
         if(isset($_GET['id']))
         {
-           $libro = $this->libro->ObtenerPorId($_GET['id']);
+           $libro = $this->libro->ObtenerPorIdNull($_GET['id']);
 
            if($libro === null)
            {
@@ -53,36 +40,57 @@ class CarritoControlador{
 
            $id_usuario = $_SESSION['id_usuario'];
 
-           $carrito = $this->modelo->ObtenerPorIdUsuario(id_usuario);
+           $carrito = $this->modelo->ObtenerPorIdUsuario($id_usuario);
+           $libroCarrito = $this->librosCarrito->ObtenerPorIdLibro($_GET['id'], $carrito->getIdCarrito());
 
-           $libroCarrito = new LibrosCarrito();
+           if($libroCarrito === null)
+           {
+                $libroCarrito = new LibrosCarrito();
 
-           $libroCarrito->setIdCarrito($carrito->getIdCarrito());
-           $libroCarrito->setIdLibro($_GET['id']);
-           $libroCarrito->setCantidadLibro(0);
+                $libroCarrito->setIdCarrito($carrito->getIdCarrito());
+                $libroCarrito->setIdLibro($_GET['id']);
+                $libroCarrito->setCantidadLibro(1);
+    
+                $this->librosCarrito->Insertar($libroCarrito);
+           }          
 
-           $this->librosCarrito->Insertar($libroCarrito);
-
-           header("location:?c=");
+           header("location:?c=carrito");
         }
     }
 
     public function EliminarDelCarrito(){
+        
+        if(isset($_GET['id']))
+        {
+           $libroCarrito = $this->librosCarrito->ObtenerPorId($_GET['id']);
 
+           if($libroCarrito === null)
+           {
+                die("No se pudo encontrar el libro dentro del carrito");
+           }
+
+           $this->librosCarrito->Eliminar($libroCarrito);
+
+           header("location:?c=carrito");
+        }
     }
 
-    public function ConsultarCarrito(){
+    public function ConsultarLibrosCarrito(){
 
+        
+        $id_usuario = $_SESSION['id_usuario'];
+
+        $carrito = $this->modelo->ObtenerPorIdUsuario($id_usuario);
+
+        $resultado = $this->librosCarrito->ListarPorCarrito($carrito->getIdCarrito());
+
+        foreach ($resultado as $r)
+        {
+            $this->totalCarrito = $this->totalCarrito + (doubleval($r->precio) * doubleval($r->cantidad_libro));
+        }
+
+        return $resultado;
     }
-
-    public function Carrito(){
-
-        require_once "vistas/header.php";
-        require_once "vistas/carrito/index.php";
-        require_once "vistas/footer.php";
-
-    }
-
 
     public function Guardar()
     {

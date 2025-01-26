@@ -72,7 +72,39 @@
                     <a href="products.html">Ver Catalogo <i class="fa fa-angle-right"></i></a>
                 </div>
             </div>
-            <div class="col-md-4">
+
+            <?php foreach ($this->libro->ListarPagina(0,6) as $r): ?>
+
+                <div class="col-md-4">
+                <div class="product-item">
+                    <a href="#"><img class="product-img-size" src="<?= $r->img ?>" alt=""></a>
+
+                    <div class="down-content">
+                        <a href="#">
+                            <h4><?= $r->titulo ?></h4>
+                        </a>
+                        <h6><br>$<?= number_format($r->precio) ?></h6>
+                        <p><?=$r->sinopsis ?></p>
+                        <ul class="stars">
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                        </ul>
+                        <!-- <span>Opiniones (24)</span> -->
+                        <div class="row">
+
+                            <a class="btn btn-success mt-2 text-white" href="?c=carrito&a=AgregarAlCarrito&id=<?= $r->id_libro?>"><i class="fa fa-shopping-cart"></i> Agregar al carrito</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <?php endforeach; ?>
+
+
+            <!-- <div class="col-md-4">
                 <div class="product-item">
                     <a href="#"><img class="product-img-size" src="assets/images/product_01.jpg" alt=""></a>
 
@@ -94,7 +126,7 @@
                             <li><i class="fa fa-star"></i></li>
                             <li><i class="fa fa-star"></i></li>
                         </ul>
-                        <!-- <span>Opiniones (24)</span> -->
+                        <span>Opiniones (24)</span> 
                         <div class="row">
 
                             <a class="btn btn-success mt-2 text-white" href="?c=carrito&a=AgregarAlCarrito&id=1"><i class="fa fa-shopping-cart"></i> Agregar al carrito</a>
@@ -229,7 +261,7 @@
                         <span>Opiniones (32)</span>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

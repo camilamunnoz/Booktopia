@@ -84,7 +84,7 @@
                 <a class="nav-link" href="contact.html"><i class="fa fa-heart"></i></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="shopping-cart.html"><i class="fa fa-shopping-cart"></i></a>
+                <a class="nav-link" href="?c=carrito"><i class="fa fa-shopping-cart"></i></a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

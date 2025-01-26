@@ -60,6 +60,22 @@ class LibrosCarrito
         }
     }
 
+    public function ListarPorCarrito($id_carrito){
+        try {
+            
+            $consulta = $this->pdo->prepare("SELECT * FROM libros_carrito INNER JOIN libro ON libro.id_libro = libros_carrito.id_libro INNER JOIN categorias ON categorias.id_categoria = libro.id_categoria INNER JOIN generos ON generos.id_genero = libro.id_genero WHERE id_carrito = ?;");
+
+            $consulta->execute(array(
+                $id_carrito
+            ));
+
+            return $consulta->fetchAll(PDO::FETCH_OBJ);
+
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function Insertar(LibrosCarrito $libros_carrito)
     {
         try {
@@ -128,6 +144,34 @@ class LibrosCarrito
             $libros_carrito->setCantidadLibro($resultado->cantidad_libro);
             $libros_carrito->setIdLibrosCarrito(($resultado->id_libro_carrito));
         
+            
+            return $libros_carrito;
+
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function ObtenerPorIdLibro($id_libro, $id_carrito){
+        try {
+            
+            $consulta = $this->pdo->prepare("SELECT * FROM libros_carrito WHERE id_libro=? AND id_carrito=?;");
+            $consulta->execute(array(
+                $id_libro,
+                $id_carrito));
+            $resultado = $consulta->fetch(PDO::FETCH_OBJ);
+
+            if($consulta->rowCount() == 0)
+            {
+                return null;
+            }
+
+            $libros_carrito = new LibrosCarrito();
+
+            $libros_carrito->setIdCarrito($resultado->id_carrito);
+            $libros_carrito->setIdLibro($resultado->id_libro);
+            $libros_carrito->setCantidadLibro($resultado->cantidad_libro);
+            $libros_carrito->setIdLibrosCarrito(($resultado->id_libros_carrito));        
             
             return $libros_carrito;
 
