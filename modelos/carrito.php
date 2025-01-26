@@ -72,6 +72,8 @@ class Carrito
                 $carrito->getTotal()
             ));
 
+            return $this->pdo->lastInsertId();
+
         } catch (Exception $e) {
             die($e->getMessage());
         }
@@ -127,6 +129,55 @@ class Carrito
             $carrito->setTotal($resultado->total);
             
             return $carrito;
+
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function ObtenerPorIdUsuario($id_usuario){
+        
+        try {
+            
+            $consulta = $this->pdo->prepare("SELECT * FROM carrito WHERE id_usuario=?;");
+            $consulta->execute(array($id_usuario));
+            
+            $carrito = new Carrito();
+
+            if($consulta->rowCount() == 0)
+            {
+
+                $carrito->setIdUsuario(id_usuario);
+                $carrito->setFechaCreacion(date("Y-m-d H:i:s"));
+                $carrito->setTotal(0);
+
+                $id_carrito = $this->Insertar($carrito);
+
+                $carrito->setIdCarrito(id_carrito);
+            }
+            else
+            {
+                $resultado = $consulta->fetch(PDO::FETCH_OBJ);
+
+                $carrito->setIdCarrito($resultado->id_carrito);
+                $carrito->setIdUsuario($resultado->id_usuario);
+                $carrito->setFechaCreacion($resultado->fecha_creacion);
+                $carrito->setTotal($resultado->total);
+            }            
+            
+            return $carrito;
+
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function Obtener($id_libro, $id_usuario){
+        try {
+
+            $consulta = $this->pdo->prepare(query: "SELECT id_carrito FROM carrito WHERE id_usuario=?;");
+            $consulta->execute(array($id_usuario));
+            $resultado = $consulta->fetch(PDO::FETCH_OBJ);
 
         } catch (Exception $e) {
             die($e->getMessage());

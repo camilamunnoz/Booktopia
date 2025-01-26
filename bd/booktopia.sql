@@ -24,7 +24,7 @@ create table libro (
 
 id_libro int not null primary key auto_increment,
 titulo varchar(200) not null,
-id_autor int not null,
+nombre_autor varchar(250) not null,
 id_genero int not null,
 id_categoria int not null,
 precio decimal(10,2) not null,
@@ -165,7 +165,7 @@ REFERENCES carrito (id_carrito);
 
 ALTER TABLE libros_carrito 
 ADD CONSTRAINT fk_libros_carrito_libro_1
-FOREIGN KEY (id_libro)mu
+FOREIGN KEY (id_libro)
 REFERENCES libro (id_libro);
 
 

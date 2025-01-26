@@ -93,7 +93,11 @@
                             <li><i class="fa fa-star"></i></li>
                             <li><i class="fa fa-star"></i></li>
                         </ul>
-                        <span>Opiniones (24)</span>
+                        <!-- <span>Opiniones (24)</span> -->
+                        <div class="row">
+
+                            <a class="btn btn-success mt-2 text-white" href="?c=carrito&a=AgregarAlCarrito&id=1"><i class="fa fa-shopping-cart"></i> Agregar al carrito</a>
+                        </div>
                     </div>
                 </div>
             </div>

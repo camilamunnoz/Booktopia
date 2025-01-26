@@ -229,7 +229,7 @@ class Libro
             $libro->setPrecio($resultado->precio);
             $libro->setSinopsis($resultado->sinopsis);
             $libro->setImg($resultado->img);
-            
+
             return $libro;
 
         } catch (Exception $e) {

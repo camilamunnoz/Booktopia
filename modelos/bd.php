@@ -3,9 +3,9 @@
 class BD
 {
 
-    const servidor="localhost:3306";
+    const servidor="localhost:3309";
     const usuario="root";
-    const clave="2610";
+    const clave="";
     const nombre="booktopia";
 
     public static function Conectar()
