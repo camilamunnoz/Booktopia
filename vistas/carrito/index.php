@@ -12,7 +12,6 @@
                     <div class="col-md-12 cart-items-container mb-2">
 
                         <?php foreach ($this->ConsultarLibrosCarrito() as $r): ?>
-
                             <div class="row mt-2">
                                 <div class="col-md-2">
 
@@ -38,7 +37,7 @@
                                     <input type="number" value="<?= $r->cantidad_libro ?>" style="width:50px;" min="1"/>
                                 </div>
                                 <div class="col-md-1 mt-5">
-                                    <a class="btn btn-danger text-white" href="?c=carrito&a=EliminarDelCarrito&id=<?= $r->id_libros_Carrito ?>"><i class="fa fa-trash"></i></a>
+                                    <a class="btn btn-danger text-white" href="?c=carrito&a=EliminarDelCarrito&id=<?= $r->id_libros_carrito ?>"><i class="fa fa-trash"></i></a>
                                 </div>
                             </div>                        
                             <div class="row">

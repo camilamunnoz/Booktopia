@@ -69,7 +69,7 @@ class CarritoControlador{
                 die("No se pudo encontrar el libro dentro del carrito");
            }
 
-           $this->librosCarrito->Eliminar($libroCarrito);
+           $this->librosCarrito->Eliminar($libroCarrito->getIdLibrosCarrito());
 
            header("location:?c=carrito");
         }

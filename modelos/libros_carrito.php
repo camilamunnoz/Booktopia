@@ -142,7 +142,7 @@ class LibrosCarrito
             $libros_carrito->setIdCarrito($resultado->id_carrito);
             $libros_carrito->setIdLibro($resultado->id_libro);
             $libros_carrito->setCantidadLibro($resultado->cantidad_libro);
-            $libros_carrito->setIdLibrosCarrito(($resultado->id_libro_carrito));
+            $libros_carrito->setIdLibrosCarrito(($resultado->id_libros_carrito));
         
             
             return $libros_carrito;
